@@ -33,7 +33,7 @@ module.exports = {
       "venv": "env",
       "message": [
           //"pip install git+https://github.com/cocktailpeanut/StreamDiffusion.git@custom_acceleration#egg=streamdiffusion[tensorrt]",,
-          "pip install .",
+          "pip install -e .",
           "python -m streamdiffusion.tools.install-tensorrt"
       ]
     }
