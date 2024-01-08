@@ -3,7 +3,10 @@ module.exports = async (kernel) => {
     "HOST": "127.0.0.1",
     "MODEL": "stabilityai/sd-turbo"
   }
-  if (kernel.gpu !== 'nvidia') {
+  if (kernel.gpu === 'nvidia') {
+  } else if (kernel.platform === 'darwin' && kernel.arch === 'arm64') {
+    env.ACCELERATION = "sfast"
+  } else {
     env.ACCELERATION = "none"
   }
   return {
