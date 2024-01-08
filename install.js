@@ -2,7 +2,7 @@ module.exports = async (kernel) => {
   let cmds
   if (kernel.gpu === 'nvidia') {
     cmds = [
-      "pip install git+https://github.com/cocktailpeanut/StreamDiffusion.git@custom_acceleration#egg=streamdiffusion[tensorrt]",,
+      "pip install git+https://github.com/cumulo-autumn/StreamDiffusion.git@custom_acceleration#egg=streamdiffusion[tensorrt]",,
       "python -m streamdiffusion.tools.install-tensorrt"
     ]
   } else {
@@ -27,7 +27,7 @@ module.exports = async (kernel) => {
     "run": [{
       "method": "shell.run",
       "params": {
-        "message": "git clone https://github.com/cocktailpeanut/StreamDiffusion.git -b custom_acceleration app",
+        "message": "git clone https://github.com/cumulo-autumn/StreamDiffusion.git app",
       }
     }, {
       "method": "shell.run",
