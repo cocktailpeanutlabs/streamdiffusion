@@ -15,7 +15,7 @@ module.exports = {
   "run": [{
     "method": "shell.run",
     "params": {
-      "message": "git clone https://github.com/cocktailpeanut/StreamDiffusion.git app",
+      "message": "git clone https://github.com/cocktailpeanut/StreamDiffusion.git -b custom_acceleration app",
     }
   }, {
     "method": "shell.run",
@@ -32,7 +32,8 @@ module.exports = {
       "path": "app",
       "venv": "env",
       "message": [
-          "pip install git+https://github.com/cocktailpeanut/StreamDiffusion.git@main#egg=streamdiffusion[tensorrt]",,
+          //"pip install git+https://github.com/cocktailpeanut/StreamDiffusion.git@custom_acceleration#egg=streamdiffusion[tensorrt]",,
+          "pip install .",
           "python -m streamdiffusion.tools.install-tensorrt"
       ]
     }

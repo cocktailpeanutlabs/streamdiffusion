@@ -4,7 +4,7 @@ module.exports = async (kernel) => {
     "MODEL": "stabilityai/sd-turbo"
   }
   if (kernel.gpu !== 'nvidia' && kernel.platform === 'darwin') {
-    env.ACCELERATION = "none"
+    env.ACCELERATION = "sfast"
   }
   return {
     daemon: true,
