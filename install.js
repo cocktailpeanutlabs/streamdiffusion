@@ -2,28 +2,22 @@ module.exports = async (kernel) => {
   let cmds
   if (kernel.gpu === 'nvidia') {
     cmds = [
-      "pip install git+https://github.com/cumulo-autumn/StreamDiffusion.git@main#egg=streamdiffusion[tensorrt]",,
+      "pip install huggingface_hub==0.25.2",
+      "pip install 'streamdiffusion[tensorrt] @ git+https://github.com/cumulo-autumn/StreamDiffusion.git@main'",
       "python -m streamdiffusion.tools.install-tensorrt"
     ]
   } else {
     cmds = [
+      "pip install huggingface_hub==0.25.2",
       "pip install -e .",
     ]
   }
   return {
     "cmds": {
-      "nvidia": "pip install torch torchvision torchaudio xformers --index-url https://download.pytorch.org/whl/cu118",
-      "amd": "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/rocm5.6",
-      "default": "pip3 install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu"
+      "nvidia": "pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 xformers --index-url https://download.pytorch.org/whl/cu118",
+      "amd": "pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/rocm6.0",
+      "default": "pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu"
     },
-    "requires": [{
-      "type": "conda",
-      "name": "ffmpeg",
-      "args": "-c conda-forge"
-    }, {
-      "gpu": "nvidia",
-      "name": "cuda"
-    }],
     "run": [{
       "method": "shell.run",
       "params": {
@@ -50,9 +44,9 @@ module.exports = async (kernel) => {
     {
       "method": "shell.run",
       "params": {
+        "path": "app/demo/realtime-txt2img",
         "venv": "../../env",
         "message": "pip install -r requirements.txt",
-        "path": "app/demo/realtime-txt2img"
       }
     }, {
       "method": "shell.run",
@@ -98,6 +92,12 @@ module.exports = async (kernel) => {
         "venv": "../../env",
         "message": "pip install -r requirements.txt",
         "path": "app/demo/vid2vid"
+      }
+    },
+    {
+      "method": "fs.link",
+      "params": {
+        "venv": "app/env"
       }
     },
     {
