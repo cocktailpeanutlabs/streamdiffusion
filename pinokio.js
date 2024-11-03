@@ -1,15 +1,16 @@
 const path = require('path')
 module.exports = {
-  version: 1,
+  version: "2.0",
   title: "StreamDiffusion",
   description: "[NVIDIA ONLY] A Pipeline-Level Solution for Real-Time Interactive Generation https://github.com/cumulo-autumn/StreamDiffusion",
   icon: "icon.png",
   menu: async (kernel) => {
     let installing = await kernel.running(__dirname, "install.js")
     let installed = await kernel.exists(__dirname, "app", "env")
-    let running = kernel.running(__dirname, "start.js")
+    let running = await kernel.running(__dirname, "start.js")
     if (installing) {
       return [{
+        default: true,
         icon: "fa-solid fa-plug",
         text: "Installing",
         href: "install.js",
@@ -19,6 +20,7 @@ module.exports = {
         let local = kernel.memory.local[path.resolve(__dirname, "start.js")]
         if (local && local.url) {
           return [{
+            default: true,
             icon: "fa-solid fa-rocket",
             text: "Open Web UI",
             href: local.url,
@@ -29,6 +31,7 @@ module.exports = {
           }]
         } else {
           return [{
+            default: true,
             icon: 'fa-solid fa-terminal',
             text: "Terminal",
             href: "start.js",
@@ -97,6 +100,7 @@ module.exports = {
       }
     } else {
       return [{
+        default: true,
         icon: "fa-solid fa-plug",
         text: "Install",
         href: "install.js",
