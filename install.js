@@ -21,7 +21,7 @@ module.exports = async (kernel) => {
     "run": [{
       "method": "shell.run",
       "params": {
-        "message": "git clone https://github.com/cumulo-autumn/StreamDiffusion.git app",
+        "message": "git clone https://github.com/pinokiofactory/StreamDiffusion app",
       }
     }, {
       "method": "shell.run",
