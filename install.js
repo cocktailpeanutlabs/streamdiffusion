@@ -3,7 +3,7 @@ module.exports = async (kernel) => {
   if (kernel.gpu === 'nvidia') {
     cmds = [
       "pip install huggingface_hub==0.25.2",
-      "pip install 'streamdiffusion[tensorrt] @ git+https://github.com/cumulo-autumn/StreamDiffusion.git@main'",
+      "pip install streamdiffusion[tensorrt]@git+https://github.com/cumulo-autumn/StreamDiffusion.git@main",
       "python -m streamdiffusion.tools.install-tensorrt"
     ]
   } else {
