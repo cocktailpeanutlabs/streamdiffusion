@@ -21,9 +21,9 @@ module.exports = async (kernel) => {
   let cmds
   if (kernel.gpu === 'nvidia') {
     cmds = [
-      "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
       //"uv pip install huggingface_hub==0.20.2",
       "uv pip install streamdiffusion[tensorrt]@git+https://github.com/pinokiofactory/StreamDiffusion.git@main",
+      "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
       "python -m streamdiffusion.tools.install-tensorrt"
     ]
   } else {
@@ -31,6 +31,7 @@ module.exports = async (kernel) => {
       "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
       //"uv pip install huggingface_hub==0.20.2",
       "uv pip install -e .",
+      "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
     ]
   }
   return {
