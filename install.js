@@ -1,37 +1,34 @@
 module.exports = async (kernel) => {
-  let cmd = "uv pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cpu"
+  let cmd = "pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/cpu"
   if (kernel.platform === 'darwin') {
     if (kernel.arch === "arm64") {
-      cmd = "uv pip install torch torchaudio torchvision"
+      cmd = "pip install torch torchaudio torchvision"
     } else {
-      cmd = "uv pip install torch==2.1.2 torchaudio==2.1.2"
+      cmd = "pip install torch==2.1.2 torchaudio==2.1.2"
     }
   } else {
     if (kernel.gpu === 'nvidia') {
       if (kernel.gpu_model && / 50.+/.test(kernel.gpu_model)) {
-        cmd = "uv pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128"
+        cmd = "pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128"
       } else {
-        cmd = "uv pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 xformers --index-url https://download.pytorch.org/whl/cu124"
+        cmd = "pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 xformers --index-url https://download.pytorch.org/whl/cu124"
       }
     } else if (kernel.gpu === 'amd') {
-      cmd = "uv pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/rocm6.2"
+      cmd = "pip install torch==2.5.0 torchvision==0.20.0 torchaudio==2.5.0 --index-url https://download.pytorch.org/whl/rocm6.2"
     } 
   }
 //module.exports = async (kernel) => {
   let cmds
   if (kernel.gpu === 'nvidia') {
     cmds = [
-      //"uv pip install huggingface_hub==0.20.2",
-      "uv pip install streamdiffusion[tensorrt]@git+https://github.com/pinokiofactory/StreamDiffusion.git@main",
-      "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
+      "pip install huggingface_hub==0.25.2",
+      "pip install streamdiffusion[tensorrt]@git+https://github.com/pinokiofactory/StreamDiffusion.git@main",
       "python -m streamdiffusion.tools.install-tensorrt"
     ]
   } else {
     cmds = [
-      "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
-      //"uv pip install huggingface_hub==0.20.2",
-      "uv pip install -e .",
-      "uv pip install huggingface_hub==0.25.2 diffusers>=0.29.0",
+      "pip install huggingface_hub==0.25.2",
+      "pip install -e .",
     ]
   }
   return {
@@ -69,7 +66,7 @@ module.exports = async (kernel) => {
       "params": {
         "path": "app/demo/realtime-txt2img",
         "venv": "../../env",
-        "message": "uv pip install -r requirements.txt",
+        "message": "pip install -r requirements.txt",
       }
     }, {
       "method": "shell.run",
@@ -86,7 +83,7 @@ module.exports = async (kernel) => {
       "method": "shell.run",
       "params": {
         "venv": "../../env",
-        "message": "uv pip install -r requirements.txt",
+        "message": "pip install -r requirements.txt",
         "path": "app/demo/realtime-img2img"
       }
     }, {
@@ -104,7 +101,7 @@ module.exports = async (kernel) => {
       "method": "shell.run",
       "params": {
         "venv": "../../env",
-        "message": "uv pip install -r requirements.txt",
+        "message": "pip install -r requirements.txt",
         "path": "app/examples/screen"
       }
     },
@@ -113,7 +110,7 @@ module.exports = async (kernel) => {
       "method": "shell.run",
       "params": {
         "venv": "../../env",
-        "message": "uv pip install -r requirements.txt",
+        "message": "pip install -r requirements.txt",
         "path": "app/demo/vid2vid"
       }
     },
