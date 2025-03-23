@@ -1,6 +1,6 @@
 const path = require('path')
 module.exports = {
-  version: "2.0",
+  version: "3.0",
   title: "StreamDiffusion",
   description: "[NVIDIA ONLY] A Pipeline-Level Solution for Real-Time Interactive Generation https://github.com/cumulo-autumn/StreamDiffusion",
   icon: "icon.png",

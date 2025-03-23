@@ -20,11 +20,20 @@ module.exports = async (kernel) => {
 //module.exports = async (kernel) => {
   let cmds
   if (kernel.gpu === 'nvidia') {
-    cmds = [
-      "uv pip install huggingface_hub==0.25.2",
-      "uv pip install streamdiffusion[tensorrt]@git+https://github.com/pinokiofactory/StreamDiffusion.git@main",
-      "python -m streamdiffusion.tools.install-tensorrt"
-    ]
+    if (kernel.platform === "win32") {
+      cmds = [
+        "uv pip install huggingface_hub==0.25.2",
+        "uv pip install https://github.com/woct0rdho/triton-windows/releases/download/v3.2.0-windows.post9/triton-3.2.0-cp310-cp310-win_amd64.whl",
+        "uv pip install streamdiffusion[tensorrt]@git+https://github.com/pinokiofactory/StreamDiffusion.git@main",
+        "python -m streamdiffusion.tools.install-tensorrt"
+      ]
+    } else {
+      cmds = [
+        "uv pip install huggingface_hub==0.25.2 triton",
+        "uv pip install streamdiffusion[tensorrt]@git+https://github.com/pinokiofactory/StreamDiffusion.git@main",
+        "python -m streamdiffusion.tools.install-tensorrt"
+      ]
+    }
   } else {
     cmds = [
       "uv pip install huggingface_hub==0.25.2",
